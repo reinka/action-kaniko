@@ -1,12 +1,12 @@
 FROM alpine as certs
 
+RUN echo "https://uk.alpinelinux.org/alpine/v3.17/main" > /etc/apk/repositories
+
 RUN apk --update add ca-certificates
 
 FROM gcr.io/kaniko-project/executor:v1.9.1-debug
 
 SHELL ["/busybox/sh", "-c"]
-
-RUN echo "https://uk.alpinelinux.org/alpine/v3.17/main" > /etc/apk/repositories
 
 RUN wget -O /kaniko/jq \
     https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 && \
